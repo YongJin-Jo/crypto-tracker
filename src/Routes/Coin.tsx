@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Outlet,
-  Route,
-  Routes,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CoinInfoDefine, CoinPirceInfo } from '../type/CoinDefine';
-import { Chart } from './Chart';
-import { Price } from './Price';
 
 const Container = styled.div`
   min-width: 480px;
