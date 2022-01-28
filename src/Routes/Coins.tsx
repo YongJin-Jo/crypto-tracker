@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { CoinListDefine } from '../type/CoinInterface/CoinDefine';
+import { CoinListDefine } from '../type/CoinDefine';
 const Container = styled.div`
-  max-width: 480px;
+  min-width: 480px;
+  max-width: 50%;
   margin: 0 auto;
 `;
 const Header = styled.header`
@@ -42,6 +43,8 @@ const Coin = styled.li`
 
 const Title = styled.h1`
   color: ${props => props.theme.titleColor};
+  font-size: 48px;
+  align-items: center;
 `;
 
 const Loading = styled.div``;
