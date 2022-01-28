@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import {
+  CoinInfoDefine,
+  CoinPirceInfo,
+} from '../type/CoinInterface/CoinDefine';
 
 const Title = styled.h1`
   font-size: 48px;
@@ -32,17 +36,19 @@ interface CoinLocationDefine {
 export const Coin = () => {
   const { state, pathname } = useLocation() as CoinLocationDefine;
   const [loading, setLaogin] = useState(true);
-  const [info, setInfo] = useState({});
-  const [priceInfo, setPriceInfo] = useState({});
+  const [info, setInfo] = useState<CoinInfoDefine>();
+  const [priceInfo, setPriceInfo] = useState<CoinPirceInfo>();
 
   useEffect(() => {
     (async () => {
       const infoData = await (
         await fetch(`https://api.coinpaprika.com/v1/coins${pathname}`)
       ).json();
+
       const priceData = await (
         await fetch(`https://api.coinpaprika.com/v1/tickers${pathname}`)
       ).json();
+
       setInfo(infoData);
       setPriceInfo(priceData);
       setLaogin(false);

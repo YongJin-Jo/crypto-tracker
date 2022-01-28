@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { CoinListDefine } from '../type/CoinInterface/CoinDefine';
 const Container = styled.div`
   max-width: 480px;
   margin: 0 auto;
@@ -45,23 +46,14 @@ const Title = styled.h1`
 
 const Loading = styled.div``;
 
-interface CoinDefine {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-}
-
 export const Coins = () => {
-  const [coins, setCoins] = useState<CoinDefine[]>([]);
+  const [coins, setCoins] = useState<CoinListDefine[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
       const response = await fetch('https://api.coinpaprika.com/v1/coins');
       const json = await response.json();
+
       setCoins(json.slice(0, 100));
       setLoading(false);
     })();
