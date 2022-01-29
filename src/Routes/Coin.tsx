@@ -5,11 +5,19 @@ import {
   Outlet,
   useLocation,
   useMatch,
+  useNavigate,
   useParams,
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchCoinInfo, fetchCoinTickers } from '../api/api';
 import { CoinInfoDefine, CoinPirceInfo } from '../type/CoinDefine';
+
+const Flex = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Container = styled.div`
   min-width: 480px;
@@ -74,7 +82,17 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-const HistoryBackButton = styled.input``;
+const HistoryBackButton = styled.input`
+  background-color: rgba(0, 0, 0, 0.5);
+  color: ${props => props.theme.textColor};
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  padding: 20px 5px;
+  top: 35px;
+  left: 0;
+`;
 
 interface CoinLocationDefine {
   state: string;
@@ -97,15 +115,26 @@ export const Coin = () => {
     );
 
   const loading = infoLoading || tickersLoading;
+  const navigate = useNavigate();
+
   return (
     <Container>
-      <HistoryBackButton type="button" value="버튼" />
       <Helmet>
         <title>{state ? state : loading ? 'Loading...' : infoData?.name}</title>
       </Helmet>
-      <Header>
-        <Title>{state ? state : loading ? 'Loading...' : infoData?.name}</Title>
-      </Header>
+      <Flex>
+        <HistoryBackButton
+          type="button"
+          value="뒤로가기"
+          onClick={() => navigate(-1)}
+        />
+
+        <Header>
+          <Title>
+            {state ? state : loading ? 'Loading...' : infoData?.name}
+          </Title>
+        </Header>
+      </Flex>
       {loading ? (
         <Loading>Logins...</Loading>
       ) : (
