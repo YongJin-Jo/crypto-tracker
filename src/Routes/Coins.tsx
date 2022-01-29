@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { CoinListDefine } from '../type/CoinDefine';
+import { useQuery } from 'react-query';
+import { fetchCoins } from '../api/api';
 const Container = styled.div`
   min-width: 480px;
   max-width: 50%;
@@ -50,27 +50,23 @@ const Title = styled.h1`
 const Loading = styled.div``;
 
 export const Coins = () => {
-  const [coins, setCoins] = useState<CoinListDefine[]>([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('https://api.coinpaprika.com/v1/coins');
-      const json = await response.json();
+  console.log(process.env.BASE_URL);
 
-      setCoins(json.slice(0, 100));
-      setLoading(false);
-    })();
-  }, []);
+  const { isLoading, data } = useQuery<CoinListDefine[]>(
+    'allCoins',
+    fetchCoins
+  );
+
   return (
     <Container>
       <Header>
         <Title>코인</Title>
       </Header>
-      {loading ? (
+      {isLoading ? (
         <Loading>loading...</Loading>
       ) : (
         <CoinsList>
-          {coins.map(coin => (
+          {data?.slice(0, 100).map(coin => (
             <Coin key={coin.id}>
               <Link to={`/${coin.id}`} state={coin.name}>
                 <img

@@ -2,19 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Router } from './Router';
 import App from './App';
 import { theme } from './asset/css/theme/theme';
-import { GlobalStyle } from './asset/css/globalStyle';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClinent = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Router />
-        <App />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClinent}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
