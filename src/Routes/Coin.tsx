@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import {
   Link,
@@ -73,32 +74,37 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
+const HistoryBackButton = styled.input``;
+
 interface CoinLocationDefine {
   state: string;
-  pathname: string;
 }
 
 export const Coin = () => {
   const { coinId } = useParams();
-  const { state, pathname } = useLocation() as CoinLocationDefine;
+  const { state } = useLocation() as CoinLocationDefine;
   const priceMatch = useMatch('/:coinId/price');
-
   const chartMatch = useMatch('/:coinId/chart');
-
   const { isLoading: infoLoading, data: infoData } = useQuery<CoinInfoDefine>(
     ['info', coinId],
     () => fetchCoinInfo(coinId!)
   );
   const { isLoading: tickersLoading, data: tickersData } =
-    useQuery<CoinPirceInfo>(['tickers', coinId], () =>
-      fetchCoinTickers(coinId!)
+    useQuery<CoinPirceInfo>(
+      ['tickers', coinId],
+      () => fetchCoinTickers(coinId!),
+      { refetchInterval: 5000 }
     );
 
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
+      <HistoryBackButton type="button" value="버튼" />
+      <Helmet>
+        <title>{state ? state : loading ? 'Loading...' : infoData?.name}</title>
+      </Helmet>
       <Header>
-        <Title>{state}</Title>
+        <Title>{state ? state : loading ? 'Loading...' : infoData?.name}</Title>
       </Header>
       {loading ? (
         <Loading>Logins...</Loading>
@@ -114,8 +120,8 @@ export const Coin = () => {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? 'Yes' : 'No'}</span>
+              <span>Price:</span>
+              <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -131,10 +137,14 @@ export const Coin = () => {
           </Overview>
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={'chart'}>Chart</Link>
+              <Link to={'chart'} state={state}>
+                Chart
+              </Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={'price'}>Price</Link>
+              <Link to={'price'} state={state}>
+                Price
+              </Link>
             </Tab>
           </Tabs>
 
