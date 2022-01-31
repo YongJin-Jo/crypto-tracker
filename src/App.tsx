@@ -3,16 +3,17 @@ import { Router } from './Router';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import styled, { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from './asset/css/theme/theme';
-import { useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ThemeAtom } from './store/atom';
 const ThemeButton = styled.input``;
 
 function App() {
-  const [theme, setTheme] = useState(darkTheme);
-  const changeTheme = () =>
-    theme === darkTheme ? setTheme(lightTheme) : setTheme(darkTheme);
+  const theme = useRecoilValue(ThemeAtom);
+  const setTheme = useSetRecoilState(ThemeAtom);
+  const ChangeThmeme = () => setTheme(prov => !prov);
   return (
-    <ThemeProvider theme={theme}>
-      <ThemeButton type="button" value="changeTheme" onClick={changeTheme} />
+    <ThemeProvider theme={theme ? darkTheme : lightTheme}>
+      <ThemeButton type="button" value="changeTheme" onClick={ChangeThmeme} />
 
       <GlobalStyle />
       <Router />

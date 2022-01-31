@@ -31,7 +31,7 @@ const Header = styled.header`
   align-items: center;
 `;
 const Title = styled.h1`
-  color: ${props => props.theme.titleColor};
+  color: ${props => props.theme.accentColor};
   font-size: 48px;
   align-items: center;
 `;

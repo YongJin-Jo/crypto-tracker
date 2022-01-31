@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { fetchCoinHistor } from '../api/api';
 import { CoinHistory } from '../type/CoinDefine';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { ThemeAtom } from '../store/atom';
 
 const Tabs = styled.ul`
   display: flex;
@@ -41,8 +43,7 @@ export const Chart = () => {
     () => fetchCoinHistor(coinId!),
     { refetchInterval: 10000 }
   );
-  console.log(currentItem);
-
+  const theme = useRecoilValue(ThemeAtom);
   return (
     <div>
       {isLoading ? (
@@ -60,7 +61,7 @@ export const Chart = () => {
               ]}
               options={{
                 theme: {
-                  mode: 'dark',
+                  mode: theme ? 'dark' : 'light',
                 },
                 chart: {
                   height: 300,
@@ -117,6 +118,9 @@ export const Chart = () => {
                 },
               ]}
               options={{
+                theme: {
+                  mode: theme ? 'dark' : 'light',
+                },
                 chart: {
                   type: 'candlestick',
                   height: 300,

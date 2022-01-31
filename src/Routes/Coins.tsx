@@ -19,10 +19,11 @@ const Header = styled.header`
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: white;
+  background-color: ${props => props.theme.cardBgColor};
   color: ${props => props.theme.textColor};
-  margin-bottom: 10px;
   border-radius: 15px;
+  margin-bottom: 10px;
+  border: 1px solid white;
   a {
     transform: color 0.2s eaes-in;
     padding: 20px;
@@ -43,7 +44,7 @@ const Coin = styled.li`
 `;
 
 const Title = styled.h1`
-  color: ${props => props.theme.titleColor};
+  color: ${props => props.theme.accentColor};
   font-size: 48px;
   align-items: center;
 `;
