@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
 import App from './App';
-import { theme } from './asset/css/theme/theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClinent = new QueryClient();
@@ -12,9 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClinent}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <App />
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,

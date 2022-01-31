@@ -90,7 +90,7 @@ const HistoryBackButton = styled.input`
   cursor: pointer;
   position: absolute;
   padding: 20px 5px;
-  top: 35px;
+  top: 10px;
   left: 0;
 `;
 
