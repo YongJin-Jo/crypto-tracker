@@ -1,22 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import { fetchCoinHistor } from '../../../api/api';
 import { CoinHistory } from '../../../type/CoinDefine';
-
-const PriceList = styled.ul`
-  display: flex;
-  flex-direction: column;
-`;
-const PriceInfo = styled.li`
-  margin: 10px;
-  padding: 5px;
-  border-bottom: 1px solid white;
-  span {
-    margin: 10px;
-  }
-`;
+import { PriceInfo, PriceList } from './styled';
 
 export const Price = () => {
   const { coinId } = useParams();

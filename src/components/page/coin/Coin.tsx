@@ -5,94 +5,23 @@ import {
   Outlet,
   useLocation,
   useMatch,
-  useNavigate,
   useParams,
 } from 'react-router-dom';
-import styled from 'styled-components';
 import { fetchCoinInfo, fetchCoinTickers } from '../../../api/api';
 import { CoinInfoDefine, CoinPirceInfo } from '../../../type/CoinDefine';
-
-const Flex = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Container = styled.div`
-  min-width: 480px;
-  max-width: 50%;
-  margin: 0 auto;
-`;
-const Header = styled.header`
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Title = styled.h1`
-  color: ${props => props.theme.accentColor};
-  font-size: 48px;
-  align-items: center;
-`;
-
-const Loading = styled.span``;
-
-const Overview = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-`;
-const OverviewItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  span:first-child {
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-`;
-const Description = styled.p`
-  margin: 20px 0px;
-`;
-
-const Tabs = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 25px 0px;
-  gap: 10px;
-`;
-
-const Tab = styled.span<{ isActive: boolean }>`
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0px;
-  border-radius: 10px;
-  color: ${props =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
-  a {
-    display: block;
-  }
-`;
-
-const HistoryBackButton = styled.input`
-  background-color: rgba(0, 0, 0, 0.5);
-  color: ${props => props.theme.textColor};
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  padding: 20px 5px;
-  top: 10px;
-  left: 0;
-`;
+import { HistoryBackButton } from '../../atom/histroyBackButton/HistoryBackButton';
+import {
+  Container,
+  Description,
+  Flex,
+  Header,
+  Loading,
+  Overview,
+  OverviewItem,
+  Tab,
+  Tabs,
+  Title,
+} from './styled';
 
 interface CoinLocationDefine {
   state: string;
@@ -115,7 +44,6 @@ export const Coin = () => {
     );
 
   const loading = infoLoading || tickersLoading;
-  const navigate = useNavigate();
 
   return (
     <Container>
@@ -123,12 +51,7 @@ export const Coin = () => {
         <title>{state ? state : loading ? 'Loading...' : infoData?.name}</title>
       </Helmet>
       <Flex>
-        <HistoryBackButton
-          type="button"
-          value="뒤로가기"
-          onClick={() => navigate(-1)}
-        />
-
+        <HistoryBackButton />
         <Header>
           <Title>
             {state ? state : loading ? 'Loading...' : infoData?.name}

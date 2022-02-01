@@ -3,25 +3,10 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { fetchCoinHistor } from '../../../api/api';
 import { CoinHistory } from '../../../type/CoinDefine';
-import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import { ThemeAtom } from '../../../store/atom';
 import { useTab } from '../../../hooks/stateHooks';
-
-const Tabs = styled.ul`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const Tab = styled.li`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  cursor: pointer;
-  :hover {
-    color: ${props => props.theme.accentColor};
-  }
-`;
+import { Tab, Tabs } from './styled';
 
 const tabList: string[] = ['Line', 'Candlestick'];
 

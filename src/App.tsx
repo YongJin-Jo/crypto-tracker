@@ -1,9 +1,9 @@
 import { GlobalStyle } from './asset/css/globalStyle';
 import { Router } from './Router/Router';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from './asset/css/theme/theme';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { ThemeAtom } from './store/atom';
 import { DarkModeButton } from './components/atom/darkModeButton/darkModeButton';
 function App() {
