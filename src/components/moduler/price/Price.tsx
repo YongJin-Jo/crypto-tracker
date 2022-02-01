@@ -2,8 +2,8 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { fetchCoinHistor } from '../api/api';
-import { CoinHistory } from '../type/CoinDefine';
+import { fetchCoinHistor } from '../../../api/api';
+import { CoinHistory } from '../../../type/CoinDefine';
 
 const PriceList = styled.ul`
   display: flex;

@@ -9,8 +9,8 @@ import {
   useParams,
 } from 'react-router-dom';
 import styled from 'styled-components';
-import { fetchCoinInfo, fetchCoinTickers } from '../api/api';
-import { CoinInfoDefine, CoinPirceInfo } from '../type/CoinDefine';
+import { fetchCoinInfo, fetchCoinTickers } from '../../../api/api';
+import { CoinInfoDefine, CoinPirceInfo } from '../../../type/CoinDefine';
 
 const Flex = styled.div`
   position: relative;

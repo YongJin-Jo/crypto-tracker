@@ -1,12 +1,12 @@
 import ApexChart from 'react-apexcharts';
-import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { fetchCoinHistor } from '../api/api';
-import { CoinHistory } from '../type/CoinDefine';
+import { fetchCoinHistor } from '../../../api/api';
+import { CoinHistory } from '../../../type/CoinDefine';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { ThemeAtom } from '../store/atom';
+import { ThemeAtom } from '../../../store/atom';
+import { useTab } from '../../../hooks/stateHooks';
 
 const Tabs = styled.ul`
   display: flex;
@@ -23,16 +23,6 @@ const Tab = styled.li`
   }
 `;
 
-const useTab = <T,>(
-  initialTab: number,
-  allTabs: T[]
-): { currentItem: T; changeItem: Dispatch<SetStateAction<number>> } => {
-  const [currentIndex, setCurrentIndex] = useState<number>(initialTab);
-  return {
-    currentItem: allTabs[currentIndex],
-    changeItem: setCurrentIndex,
-  };
-};
 const tabList: string[] = ['Line', 'Candlestick'];
 
 export const Chart = () => {

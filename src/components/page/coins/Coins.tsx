@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { CoinListDefine } from '../type/CoinDefine';
+import { CoinListDefine } from '../../../type/CoinDefine';
 import { useQuery } from 'react-query';
-import { fetchCoins } from '../api/api';
+import { fetchCoins } from '../../../api/api';
 import { Helmet } from 'react-helmet';
 const Container = styled.div`
   min-width: 480px;

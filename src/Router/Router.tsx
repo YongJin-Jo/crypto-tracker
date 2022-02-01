@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Chart } from './Routes/Chart';
-import { Coin } from './Routes/Coin';
-import { Coins } from './Routes/Coins';
-import { Price } from './Routes/Price';
+import { Chart } from '../components/moduler/chart/Chart';
+import { Coin } from '../components/page/coin/Coin';
+import { Coins } from '../components/page/coins/Coins';
+import { Price } from '../components/moduler/price/Price';
 
 export const Router = () => {
   return (
